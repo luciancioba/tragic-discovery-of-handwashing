@@ -9,7 +9,7 @@ from matplotlib.lines import lineStyles
 import scipy.stats as stats
 
 # Notebook Presentation
-pd.options.display.float_format = '{:,.2f'.format
+pd.options.display.float_format = '{:,.2f}'.format
 
 # Create locators for ticks on the time axis
 years = mdates.YearLocator()
@@ -70,15 +70,21 @@ ax1.plot(df_monthly.date,
          linewidth=3)
 
 ax2.plot(df_monthly.date,
-         df_monthly.births,
-         color='skyblue',
+         df_monthly.deaths,
+         color='crimson',
          linewidth=3)
 
-ax2.plot(df_monthly.date,
-         df_monthly.births,
-         color='crimson',
-         linewidth=2,
-         linestyle='--')
+# Add tags
+ax1.set_xlabel('Date', fontsize=14)
+ax1.set_ylabel('Births', color='skyblue', fontsize=14)
+ax2.set_ylabel('Deaths', color='crimson', fontsize=14)
+
+# Add labels combined
+lines1, labels1 = ax1.get_legend_handles_labels()
+lines2, labels2 = ax2.get_legend_handles_labels()
+ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+
+plt.tight_layout()
 plt.show()
 
 

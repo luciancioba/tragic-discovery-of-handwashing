@@ -26,23 +26,12 @@ df_monthly = pd.read_csv('monthly_deaths.csv',
                          parse_dates=['date'])
 
 # Preliminary Data Exploration
-print(df_yearly.shape)
-df_yearly
+df_yearly.columns = df_yearly.columns.str.strip()
+df_monthly.columns = df_monthly.columns.str.strip()
 
-print(df_monthly.shape)
-df_monthly
-
-# Check for Nan and Duplicates
-df_yearly.info()
-df_monthly.info()
-
-
-# Alternative to using .info()
-print(f'Any yearly NaN values? {df_monthly.isna().values.any()}')
-print(f'Any monthly NaN values? {df_yearly.isna().values.any()}')
-
-print(f'Any yearly duplicates? {df_yearly.duplicated().values.any()}')
-print(f'Any monthly duplicates? {df_monthly.duplicated().values.any()}')
+# Verify Column names
+print("Yearly columns:", df_yearly.columns.tolist())
+print("Monthly columns:", df_monthly.columns.tolist())
 
 # Descriptive Statistics
 df_yearly.describe()

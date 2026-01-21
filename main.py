@@ -8,6 +8,14 @@ import seaborn as sns
 from matplotlib.lines import lineStyles
 import scipy.stats as stats
 
+# SET DEFAULT FIGURE SIZE FOR ALL PLOTS
+plt.rcParams['figure.figsize'] = [12, 6]  # Width, Height in inches
+plt.rcParams['figure.dpi'] = 100
+plt.rcParams['savefig.bbox'] = 'tight'  # Tight layout when saving
+
+# Notebook Presentation
+pd.options.display.float_format = '{:,.2f}'.format
+
 # Notebook Presentation
 pd.options.display.float_format = '{:,.2f}'.format
 

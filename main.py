@@ -8,13 +8,10 @@ import seaborn as sns
 from matplotlib.lines import lineStyles
 import scipy.stats as stats
 
-# SET DEFAULT FIGURE SIZE FOR ALL PLOTS
-plt.rcParams['figure.figsize'] = [12, 6]  # Width, Height in inches
+# SET DEFAULT FIGURE SETTINGS FOR BETTER SCREEN FIT - ADDED
+plt.rcParams['figure.figsize'] = [12, 6]
 plt.rcParams['figure.dpi'] = 100
-plt.rcParams['savefig.bbox'] = 'tight'  # Tight layout when saving
-
-# Notebook Presentation
-pd.options.display.float_format = '{:,.2f}'.format
+plt.rcParams['figure.autolayout'] = True
 
 # Notebook Presentation
 pd.options.display.float_format = '{:,.2f}'.format
@@ -53,8 +50,8 @@ print(f'Chances of dying in the 1840s in Vienna: {prob:.3}%')
 # Visualise the Total Number of Births and Deaths over Time
 
 # Plot the Monthly data on twin axes
-plt.figure(figsize=(14,8), dpi=200)
-plt.title('Total Number of Monthly Births and Deaths', fontsize=18)
+plt.figure(figsize=(12, 6), dpi=100)  # CHANGED: Smaller figure size
+plt.title('Total Number of Monthly Births and Deaths', fontsize=16)  # CHANGED: Smaller font
 
 ax1 = plt.gca()
 ax2 = ax1.twinx()
@@ -70,6 +67,7 @@ ax2.plot(df_monthly.date,
          df_monthly.deaths,
          color='crimson',
          linewidth=3)
+
 
 # Add tags
 ax1.set_xlabel('Date', fontsize=14)

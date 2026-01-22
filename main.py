@@ -8,7 +8,7 @@ import seaborn as sns
 from matplotlib.lines import lineStyles
 import scipy.stats as stats
 
-# SET DEFAULT FIGURE SETTINGS FOR BETTER SCREEN FIT - ADDED
+# SET DEFAULT FIGURE SETTINGS FOR BETTER SCREEN FIT!!!
 plt.rcParams['figure.figsize'] = [12, 6]
 plt.rcParams['figure.dpi'] = 100
 plt.rcParams['figure.autolayout'] = True
@@ -50,8 +50,8 @@ print(f'Chances of dying in the 1840s in Vienna: {prob:.3}%')
 # Visualise the Total Number of Births and Deaths over Time
 
 # Plot the Monthly data on twin axes
-plt.figure(figsize=(12, 6), dpi=100)  # CHANGED: Smaller figure size
-plt.title('Total Number of Monthly Births and Deaths', fontsize=16)  # CHANGED: Smaller font
+plt.figure(figsize=(12, 6), dpi=100)
+plt.title('Total Number of Monthly Births and Deaths', fontsize=16)
 
 ax1 = plt.gca()
 ax2 = ax1.twinx()
@@ -68,16 +68,15 @@ ax2.plot(df_monthly.date,
          color='crimson',
          linewidth=3)
 
-
 # Add tags
-ax1.set_xlabel('Date', fontsize=14)
-ax1.set_ylabel('Births', color='skyblue', fontsize=14)
-ax2.set_ylabel('Deaths', color='crimson', fontsize=14)
+ax1.set_xlabel('Date', fontsize=12)
+ax1.set_ylabel('Births', color='skyblue', fontsize=12)
+ax2.set_ylabel('Deaths', color='crimson', fontsize=12)
 
 # Add labels combined
 lines1, labels1 = ax1.get_legend_handles_labels()
 lines2, labels2 = ax2.get_legend_handles_labels()
-ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left')
+ax1.legend(lines1 + lines2, labels1 + labels2, loc='upper left', fontsize=10)
 
 plt.tight_layout()
 plt.show()
@@ -90,6 +89,13 @@ line = px.line(df_yearly,
                color='clinic',
                title='Total Yearly Births by Clinic')
 
+# add better fit
+line.update_layout(
+    autosize=True,
+    margin=dict(l=50, r=50, t=50, b=50),
+    height=400,
+    width=None  # responsive
+)
 line.show()
 
 line = px.line(df_yearly,
@@ -98,6 +104,13 @@ line = px.line(df_yearly,
                color='clinic',
                title='Total Yearly Deaths by Clinic')
 
+# better fit
+line.update_layout(
+    autosize=True,
+    margin=dict(l=50, r=50, t=50, b=50),
+    height=400,
+    width=None
+)
 line.show()
 
 
@@ -123,12 +136,12 @@ roll_df = roll_df.rolling(window=6).mean()
 roll_df
 
 # Highlighting Subsections of a Line Chart
-plt.figure(figsize=(14,8), dpi=200)
-plt.title('Percentage of Monthly Deaths over Time', fontsize=18)
-plt.yticks(fontsize=14)
-plt.xticks(fontsize=14, rotation=45)
+plt.figure(figsize=(12, 6), dpi=100)
+plt.title('Percentage of Monthly Deaths over Time', fontsize=16)
+plt.yticks(fontsize=12)
+plt.xticks(fontsize=12, rotation=45)
 
-plt.ylabel('Percentage of Deaths', color='crimson', fontsize=18)
+plt.ylabel('Percentage of Deaths', color='crimson', fontsize=14)
 
 ax = plt.gca()
 ax.xaxis.set_major_locator(years)
@@ -158,7 +171,8 @@ aw_line, = plt.plot(after_washing.date,
                     label='After Handwashing')
 
 plt.legend(handles=[ma_line, bw_line, aw_line],
-           fontsize=18)
+           fontsize=12)  #
+plt.tight_layout()
 plt.show()
 
 
@@ -185,7 +199,11 @@ box = px.box(df_monthly,
              title='How Have the Stats Changed with Handwashing?')
 
 box.update_layout(xaxis_title='Washing Hands?',
-                  yaxis_title='Percentage of Monthly Deaths',)
+                  yaxis_title='Percentage of Monthly Deaths',
+                  # ADDED: For better fit
+                  autosize=True,
+                  margin=dict(l=50, r=50, t=50, b=50),
+                  height=450)
 
 box.show()
 
@@ -201,7 +219,11 @@ hist = px.histogram(df_monthly,
                     marginal='box')
 
 hist.update_layout(xaxis_title='Proportion of Monthly Deaths',
-                   yaxis_title='Count')
+                   yaxis_title='Count',
+                   # ADDED: For better fit
+                   autosize=True,
+                   margin=dict(l=50, r=50, t=50, b=50),
+                   height=450)
 hist.show()
 
 # # Kernel Density Estimate (KDE) to visualise smooth distribution
@@ -227,4 +249,3 @@ t_stat, p_value = stats.ttest_ind(a=before_washing.pct_deaths,
                                   b=after_washing.pct_deaths)
 print(f'p-palue is {p_value:.10f}')
 print(f't-statstic is {t_stat:.4}')
-
